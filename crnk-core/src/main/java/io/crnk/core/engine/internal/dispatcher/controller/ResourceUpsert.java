@@ -151,7 +151,7 @@ public abstract class ResourceUpsert extends ResourceIncludeField {
 	}
 
 	private void setAttribute(ResourceInformation resourceInformation, Object instance, String attributeJsonName,
-			JsonNode valueNode, QueryContext queryContext) {
+							  JsonNode valueNode, QueryContext queryContext) {
 		ResourceField field = resourceInformation.findFieldByJsonName(attributeJsonName, queryContext.getRequestVersion());
 
 		if (field == null && resourceInformation.hasJsonField(attributeJsonName)) {
@@ -187,7 +187,7 @@ public abstract class ResourceUpsert extends ResourceIncludeField {
 						value = filter.modifyAttribute(instance, field, attributeJsonName, value);
 					}
 					anyFieldAccessor.setValue(instance, attributeJsonName, value);
-				} else if(!isClient()) {
+				} else if(!isClient() && !resourceInformation.getAllowUnknownAttributes()) {
 					throw new BadRequestException(String.format("attribute %s not found", attributeJsonName));
 				}
 			} catch (IOException e) {
@@ -269,7 +269,7 @@ public abstract class ResourceUpsert extends ResourceIncludeField {
 	}
 
 	protected Optional<Result> setRelationsFieldAsync(Object newResource, RegistryEntry registryEntry,
-			Map.Entry<String, Relationship> property, QueryAdapter queryAdapter) {
+													  Map.Entry<String, Relationship> property, QueryAdapter queryAdapter) {
 		Relationship relationship = property.getValue();
 		if (relationship.getData().isPresent()) {
 			String fieldJsonName = property.getKey();
@@ -355,7 +355,7 @@ public abstract class ResourceUpsert extends ResourceIncludeField {
 	}
 
 	protected Optional<Result> setRelationFieldAsync(Object newResource, RegistryEntry registryEntry,
-			String relationshipName, Relationship relationship, QueryAdapter queryAdapter) {
+													 String relationshipName, Relationship relationship, QueryAdapter queryAdapter) {
 
 		if (relationship.getData().isPresent()) {
 			ResourceIdentifier relationshipId = (ResourceIdentifier) relationship.getData().get();
@@ -430,7 +430,7 @@ public abstract class ResourceUpsert extends ResourceIncludeField {
 	}
 
 	protected Result<Object> fetchRelated(RegistryEntry entry, Serializable relationId,
-			QueryAdapter queryAdapter) {
+										  QueryAdapter queryAdapter) {
 		return entry.getResourceRepository().findOne(relationId, queryAdapter)
 				.map(JsonApiResponse::getEntity);
 	}
