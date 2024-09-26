@@ -4,6 +4,7 @@ buildscript {
 		apply from: "versions.gradle"
 
 		def depMgmtVersion = versions['dependency.management.plugin.version']
+		classpath 'org.ysb33r.gradle:grolifant:0.12.1'
 
 		classpath "io.spring.gradle:dependency-management-plugin:${depMgmtVersion}"
 		classpath 'org.asciidoctor:asciidoctor-gradle-plugin:1.5.9.2'
@@ -23,6 +24,19 @@ buildscript {
 
 import com.vanniktech.maven.publish.JavaLibrary
 import com.vanniktech.maven.publish.JavadocJar
+
+//  Fix for missing dependency in JCenter / MavenCentral
+//import org.gradle.api.artifacts.DependencyResolveDetails
+//
+//configurations.all {
+//	resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+//		if (details.requested.group == 'org.ysb33r.gradle' && details.requested.name == 'grolifant' && details.requested.version in ['0.9']) {
+//			details.useVersion '0.12.1'
+//			details.because 'jcenter redirect'
+//			System.out.println ">>>>>>>>> fix grolifant"
+//		}
+//	}
+//}
 
 
 wrapper {
