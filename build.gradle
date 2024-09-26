@@ -187,7 +187,7 @@ gradle.beforeProject { Project project ->
 				group = GROUP_ID
 
 				mavenPublishing {
-					publishToMavenCentral("DEFAULT")
+//					publishToMavenCentral("DEFAULT")
 
 					// Will only apply to non snapshot builds.
 					// Uses credentials as described above, supports both regular and in memory signing.
