@@ -30,7 +30,7 @@ include ':crnk-format:crnk-format-plain-json'
 
 include ':crnk-operations'
 
-include ':crnk-documentation'
+//include ':crnk-documentation'
 include ':crnk-bom'
 
 include ':crnk-gen:crnk-gen-openapi'
