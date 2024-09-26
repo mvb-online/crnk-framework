@@ -82,9 +82,10 @@ esac
 
 CLASSPATH=$APP_HOME/gradle/wrapper/gradle-wrapper.jar
 
-JDK_DOWNLOAD_URL="https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.9%2B11_openj9-0.23.0/OpenJDK11U-jdk_x64_JDK_OS_openj9_11.0.9_11_openj9-0.23.0.JDK_DIST_SUFFIX"
-#JDK_DOWNLOAD_URL="https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u202-b08/OpenJDK8U-jdk_x64_JDK_OS_hotspot_8u202b08.JDK_DIST_SUFFIX"
-JDK_VERSION="11.0.9+11"
+#JDK_DOWNLOAD_URL="https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.9%2B11_openj9-0.23.0/OpenJDK11U-jdk_x64_JDK_OS_openj9_11.0.9_11_openj9-0.23.0.JDK_DIST_SUFFIX"
+#JDK_VERSION="11.0.9+11"
+JDK_DOWNLOAD_URL="https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u202-b08/OpenJDK8U-jdk_x64_JDK_OS_hotspot_8u202b08.JDK_DIST_SUFFIX"
+JDK_VERSION="8u202-b08"
 
 JDK_CACHE_DIR="${APP_HOME}/.gradle/jdk"
 
