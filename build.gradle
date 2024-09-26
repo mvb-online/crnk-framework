@@ -24,20 +24,7 @@ buildscript {
 
 import com.vanniktech.maven.publish.JavaLibrary
 import com.vanniktech.maven.publish.JavadocJar
-
-//  Fix for missing dependency in JCenter / MavenCentral
-//import org.gradle.api.artifacts.DependencyResolveDetails
-//
-//configurations.all {
-//	resolutionStrategy.eachDependency { DependencyResolveDetails details ->
-//		if (details.requested.group == 'org.ysb33r.gradle' && details.requested.name == 'grolifant' && details.requested.version in ['0.9']) {
-//			details.useVersion '0.12.1'
-//			details.because 'jcenter redirect'
-//			System.out.println ">>>>>>>>> fix grolifant"
-//		}
-//	}
-//}
-
+import org.gradle.api.artifacts.DependencyResolveDetails
 
 wrapper {
 	gradleVersion = '6.9.2'
@@ -47,6 +34,43 @@ apply plugin: 'jdk-bootstrap'
 jdk {
 //	useAdoptOpenJdk11(JDK_VERSION)
 	useAdoptOpenJdk8(JDK_VERSION)
+}
+
+// Add repositories block for dependency resolution
+allprojects {
+	repositories {
+		// Nexus thirdparty repository
+		maven {
+			name = 'local-nexus-thirdparty'
+			url = uri('http://nexus.dev.booklan.de/repository/thirdparty/')
+		}
+
+		// Add Maven Central as a fallback
+		mavenCentral()
+		// Add JCenter if needed
+		jcenter()
+	}
+	//  Fix for missing dependency in JCenter / MavenCentral
+	configurations.all {
+//	resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+//		if (details.requested.group == 'org.ysb33r.gradle' && details.requested.name == 'grolifant' && details.requested.version in ['0.9']) {
+//			details.useVersion '0.12.1'
+//			details.because 'jcenter redirect'
+//			System.out.println ">>>>>>>>> fix grolifant"
+//		}
+//	}
+		resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+			if (details.requested.group == 'org.asciidoctor' && details.requested.name == 'asciidoctorj-groovy-dsl' && details.requested.version == '1.0.0.Alpha3') {
+				details.useVersion '1.0.0.Alpha2'
+				details.because 'jcenter redirect'
+				System.out.println ">>>>>>>>> fix asciidoctorj-groovy-dsl"
+			}
+		}
+
+		resolutionStrategy {
+			force 'org.codehaus.groovy:groovy-all:2.5.12'
+		}
+	}
 }
 
 // note that a production build creates javadoc, sources jars and signatures undesired during development
