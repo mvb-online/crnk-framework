@@ -242,13 +242,13 @@ gradle.beforeProject { Project project ->
 			}
 
 			publishing {
-				publications {
-					mavenJava(MavenPublication) {
-						from components.java
-						artifact sourcesJar
-						artifact javadocJar
-					}
-				}
+//				publications {
+//					mavenJava(MavenPublication) {
+//						from components.java
+//						artifact sourcesJar
+//						artifact javadocJar
+//					}
+//				}
 				repositories {
 					maven {
 						name = 'local'
