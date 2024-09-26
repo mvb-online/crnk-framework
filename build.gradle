@@ -256,7 +256,7 @@ gradle.beforeProject { Project project ->
 					}
 					maven {
 						name = 'nexus'
-						url = uri("http://nexus.dev.booklan.de/repository/maven-releases/") // URL Ihres Nexus-Repositorys
+						url = uri("http://nexus.dev.booklan.de/repository/releases/") // URL Ihres Nexus-Repositorys
 						credentials {
 							username = System.getenv("NEXUS_USERNAME")
 							password = System.getenv("NEXUS_PASSWORD")
